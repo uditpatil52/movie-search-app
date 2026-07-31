@@ -33,9 +33,16 @@ search.addEventListener("click",async function(){
     <p>Year: ${data.Year}</p>
     <p>Runtime:${data.Runtime}</p>
     <p>Cast:${data.Actors}</p>
-    <p>Rating:${data.imdbRating}</p>
+    <p>Rating:${data.imdbRating}⭐</p>
     <p>Plot: ${data.Plot}</p> 
 `;
+if (data.Poster && data.Poster !== "N/A") {
+    document.querySelector(".backdrop").style.backgroundImage = `url(${data.Poster})`;
+        
+} else {
+    document.querySelector(".backdrop").style.backgroundImage = "none";
+}
+
 
 } catch(error){
     show.innerHTML = "<h2>Something went wrong !"
@@ -48,5 +55,11 @@ search.addEventListener("click",async function(){
 input.addEventListener("keypress",function(event){
     if(event.key==="Enter"){
         search.click();
+    }
+});
+input.addEventListener("input", function () {
+    if (input.value.trim() === "") {
+        document.querySelector(".backdrop").style.backgroundImage = "none";
+        show.innerHTML = ""; 
     }
 });
